@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kairumlbb Preset — Alight Motion Presets</title>
+<meta name="description" content="Premium Alight Motion presets for creators.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+
+/* TEMA KEMBALI KE UNGU & BIRU */
+:root{
+  --bg:#070709;
+  --card:#111116;
+  --text:#f5f5f7;
+  --muted:#94949f;
+  --line:#24242c;
+  --accent:#8b5cf6;  /* Neon Purple */
+  --accent2:#3b82f6; /* Electric Blue */
+}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;background:radial-gradient(circle at 80% 0%,#1b1230 0,transparent 28%),var(--bg);color:var(--text);line-height:1.5}
+a{text-decoration:none;color:inherit}
+.container{width:min(1120px,92%);margin:auto}
+nav{height:76px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.06);position:sticky;top:0;background:rgba(7,7,9,.78);backdrop-filter:blur(18px);z-index:20}
+
+.logo{font-weight:800;letter-spacing:-.05em;font-size:21px;margin-left:12px}
+
+.nav-profile{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid var(--accent);
+  margin-right:12px;
+}
+
+.hero{padding:20px 0 10px;position:relative;overflow:hidden}
+h1{font-size:clamp(36px,6.5vw,70px);line-height:1.05;letter-spacing:-.05em;max-width:850px}
+.gradient{background:linear-gradient(100deg,#fff 25%,#a78bfa 55%,#60a5fa);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--muted);max-width:600px;font-size:15px;margin:12px 0 0}
+
+.section{padding:20px 0 40px}
+.eyebrow{color:#9b7cff;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.13em;margin-bottom:10px;display:block}
+.controls{display:flex;gap:9px;margin-bottom:18px}
+.search{width:100%;background:#0e0e12;border:1px solid var(--line);color:white;padding:12px 16px;border-radius:12px;outline:none;font-size:14px}
+.search:focus{border-color:#8b5cf6}
+
+.grid{display:grid;grid-template-columns:repeat(4, 1fr);gap:16px}
+.card{background:linear-gradient(180deg,#121218,#0e0e12);border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:.25s}
+.card:hover{transform:translateY(-4px);border-color:#40345e}
+
+.thumb{aspect-ratio:9/16;position:relative;overflow:hidden;background:#151020;display:flex;align-items:center;justify-content:center}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
+.thumb:hover img{transform:scale(1.04)}
+
+.play-btn{
+  position:absolute;
+  width:44px;
+  height:44px;
+  background:rgba(0,0,0,.65);
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  font-size:16px;
+  backdrop-filter:blur(6px);
+  z-index:2;
+  transition:transform .2s, background .2s;
+  padding-left:3px;
+}
+.thumb:hover .play-btn{
+  transform:scale(1.15);
+  background:rgba(139,92,246,.85);
+  border-color:#8b5cf6;
+}
+
+.info{padding:14px}.info h3{font-size:14px}.info p{font-size:11px;color:#777783;margin:4px 0 10px}
+
+.btn-group{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.btn-dl{display:block;text-align:center;padding:8px 0;border-radius:8px;background:#18181f;border:1px solid #292932;font-size:11px;font-weight:700;color:white;transition:.2s}
+.btn-dl:hover{background:#24212e;border-color:#8b5cf6}
+
+.about{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.panel{
+  padding:24px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:#0d0d11;
+  cursor:pointer;
+  transition:.25s ease;
+  user-select:none;
+}
+.panel:hover{
+  border-color:var(--accent);
+  transform:translateY(-3px);
+  background:#121118;
+}
+.panel p{color:#92929c;font-size:13px;margin-top:8px}
+
+.modal-overlay{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:rgba(0,0,0,0.75);
+  backdrop-filter:blur(8px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .3s ease;
+  z-index:100;
+}
+.modal-overlay.active{
+  opacity:1;
+  pointer-events:auto;
+}
+.modal-box{
+  width:min(360px, 85vw);
+  aspect-ratio: 4/5;
+  background:#111116;
+  border:1px solid var(--accent);
+  border-radius:24px;
+  padding:28px 24px;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  box-shadow:0 20px 40px rgba(0,0,0,0.8), 0 0 20px rgba(139,92,246,0.2);
+  transform:scale(0.85);
+  transition:transform .3s ease;
+  overflow-y:auto;
+}
+.modal-overlay.active .modal-box{
+  transform:scale(1);
+}
+.modal-close{
+  position:absolute;
+  top:16px;
+  right:18px;
+  background:rgba(255,255,255,0.08);
+  border:none;
+  color:#fff;
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  font-size:16px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:.2s;
+}
+.modal-close:hover{
+  background:rgba(255,255,255,0.2);
+}
+.modal-body p{color:#94949f;font-size:14px;margin-top:12px;line-height:1.6}
+
+.qris-container{
+  margin-top:14px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+}
+.qris-wrapper{
+  width:100%;
+  max-width:180px;
+  aspect-ratio:1/1;
+  border-radius:16px;
+  border:1px solid var(--accent);
+  background:#080607;
+  padding:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow: 0 4px 20px rgba(139, 92, 246, 0.2);
+  overflow:hidden;
+}
+.qris-img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:8px;
+}
+
+.social{display:flex;gap:10px;margin-top:20px}
+.social a{border:1px solid var(--line);padding:10px 14px;border-radius:10px;font-size:12px;font-weight:700;background:#18181f;transition:.2s}
+.social a:hover{border-color:var(--accent);background:#24212e}
+
+footer{border-top:1px solid var(--line);padding:28px 0;color:#666671;font-size:12px;display:flex;justify-content:space-between}
+
+@media(max-width:900px){.grid{grid-template-columns:repeat(2, 1fr)}}
+@media(max-width:760px){.hero{padding:15px 0 10px}.section{padding:15px 0 35px}}
+@media(max-width:480px){.grid{grid-template-columns:repeat(2, 1fr);gap:10px}.info{padding:10px}.info h3{font-size:12px}.info p{font-size:10px}.btn-dl{font-size:10px;padding:7px 0}footer{display:block}footer span{display:block;margin-top:6px}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="container" style="display:flex;align-items:center;justify-content:space-between;width:100%">
+    <a class="logo" href="#">KAIRUMLBB</a>
+    <img src="" alt="Profile" class="nav-profile" id="profile-pic">
+  </div>
+</nav>
+
+<header class="hero">
+<div class="container">
+  <h1>MAU PRESET DOANG,<br><span class="gradient">FOLLOW GAMAU..</span></h1>
+  <p>Preset Alight Motion Kairumlbb untuk bikin editing Mobile Legends & konten TikTok kamu lebih cepat, clean, dan keren.</p>
+</div>
+</header>
+
+<section class="section" id="presets">
+<div class="container">
+  <span class="eyebrow">List Preset</span>
+  <div class="controls">
+    <input class="search" id="search" placeholder="Cari preset..." oninput="render()">
+  </div>
+  <div class="grid" id="grid"></div>
+</div>
+</section>
+
+<section class="section" id="about">
+<div class="container">
+  <div class="about">
+    <div class="panel" onclick="openModal('about')">
+      <div class="eyebrow">About Creator</div>
+      <h2>Made by Kairumlbb.</h2>
+      <p>Klik untuk informasi selengkapnya ↗</p>
+    </div>
+    <div class="panel" onclick="openModal('creators')">
+      <div class="eyebrow">For Creators</div>
+      <h2>Fast. Clean. Easy.</h2>
+      <p>Klik untuk informasi selengkapnya ↗</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(this)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModalDirect()">✕</button>
+    <div class="modal-body">
+      <span class="eyebrow" id="modalEyebrow">Eyebrow</span>
+      <h2 id="modalTitle" style="margin-top:4px;">Title</h2>
+      <p id="modalDesc">Description text goes here.</p>
+      <div id="modalExtra"></div>
+    </div>
+    <div id="modalFooter"></div>
+  </div>
+</div>
+
+<footer class="container"><span>© 2026 KAIRUMLBB PRESET</span><span>Alight Motion Presets • Creator Resources</span></footer>
+
+<script>
+/** @type {HTMLImageElement | null} */
+const profilePic = document.getElementById("profile-pic");
+if (profilePic) {
+  profilePic.src = "pp.jpg";
+}
+
+const presets = [
+  {
+    name: "Iyung Iyung",
+    desc: "when ya, dicintai seiyung' itu", 
+    thumbnail: "iyung.jpg", 
+    videoUrl: "https://vt.tiktok.com/ZSqVdnEv1/", 
+    link5mb: "https://alightcreative.com/am/share/u/eyDEkwikkaXRWvCRyjKbr8l2BDl2/p/4knEnjVR5e-6b02269fb90a9070",
+    linkXml: "https://drive.google.com/drive/folders/1_SSMDfXwaTXaNnGqau0DhKF0geofvhey"
+  }
+];
+
+function render(){
+ const searchInput = /** @type {HTMLInputElement | null} */ (document.getElementById("search"));
+ const q = searchInput ? searchInput.value.toLowerCase() : "";
+ const list = presets.filter(p => p.name.toLowerCase().includes(q));
+ 
+ const grid = document.getElementById("grid");
+ if (grid) {
+   grid.innerHTML = list.map((p) => {
+     return `
+     <article class="card">
+       <a class="thumb" href="${p.videoUrl || '#'}" target="_blank" title="Tonton Preview Video">
+         <img src="${p.thumbnail || 'https://via.placeholder.com/400x711'}" alt="${p.name}">
+         <div class="play-btn">▶</div>
+       </a>
+       <div class="info">
+         <h3>${p.name}</h3>
+         <p>${p.desc}</p>
+         <div class="btn-group">
+           <a class="btn-dl" href="${p.link5mb || '#'}" target="_blank">&lt;5MB</a>
+           <a class="btn-dl" href="${p.linkXml || '#'}" target="_blank">XML</a>
+         </div>
+       </div>
+     </article>`;
+   }).join("") || '<p style="color:#777">Preset tidak ditemukan.</p>';
+ }
+}
+
+/** @param {string} type */
+function openModal(type) {
+  const overlay = document.getElementById("modalOverlay");
+  const eyebrow = document.getElementById("modalEyebrow");
+  const title = document.getElementById("modalTitle");
+  const desc = document.getElementById("modalDesc");
+  const extra = document.getElementById("modalExtra");
+  const footer = document.getElementById("modalFooter");
+
+  if (!overlay || !eyebrow || !title || !desc || !extra || !footer) return;
+
+  if (type === 'about'){
+    eyebrow.innerText = "About Creator";
+    title.innerText = "Made by Kairumlbb.";
+    desc.innerText = "Tempat berbagi preset Alight Motion yang gue pakai dan bikin khusus untuk konten MLBB dan gameplay. Support terus dengan follow sosial media di bawah!";
+    extra.innerHTML = "";
+    footer.innerHTML = `
+      <div class="social">
+        <a href="https://www.tiktok.com/kairumlbb" target="_blank">TikTok ↗</a>
+        <a href="https://www.instagram.com/richhslvtr._?stkn=NTZvZHN0b2Nmdzk=" target="_blank">Instagram ↗</a>
+      </div>`;
+  } else if (type === 'creators') {
+    eyebrow.innerText = "For Creators";
+    title.innerText = "Support Creator";
+    desc.innerText = "Dukung karya Kairumlbb agar bisa terus upload preset-preset keren gratis!";
+    extra.innerHTML = `
+      <div class="qris-container">
+        <div class="qris-wrapper">
+          <img src="qris.jpg" alt="QRIS" class="qris-img">
+        </div>
+      </div>`;
+    footer.innerHTML = `<span style="font-size:11px;color:#666;display:block;text-align:center;">Version 1.0 • Kairumlbb Project</span>`;
+  }
+
+  overlay.classList.add("active");
+}
+
+/** @param {HTMLElement} element */
+function closeModal(element) {
+  element.classList.remove("active");
+}
+
+function closeModalDirect() {
+  const overlay = document.getElementById("modalOverlay");
+  if (overlay) overlay.classList.remove("active");
+}
+
+render();
+</script>
+</body>
+</html>
