@@ -271,6 +271,14 @@ const presets = [
     videoUrl: "https://vt.tiktok.com/ZSqVdnEv1/", 
     link5mb: "https://alightcreative.com/am/share/u/eyDEkwikkaXRWvCRyjKbr8l2BDl2/p/4knEnjVR5e-6b02269fb90a9070",
     linkXml: "https://drive.google.com/drive/folders/1_SSMDfXwaTXaNnGqau0DhKF0geofvhey"
+  },
+  {
+    name: "COMING SOON!",
+    desc: "Preset baru akan segera hadir", 
+    thumbnail: "sabar.jpg", 
+    videoUrl: "", 
+    link5mb: "",
+    linkXml: ""
   }
 ];
 
@@ -284,7 +292,7 @@ function render(){
    grid.innerHTML = list.map((p) => {
      return `
      <article class="card">
-       <a class="thumb" href="${p.videoUrl || '#'}" target="_blank" title="Tonton Preview Video">
+       <a class="thumb" href="${p.videoUrl || '#'}" target="${p.videoUrl ? '_blank' : '_self'}" title="Tonton Preview Video">
          <img src="${p.thumbnail || 'https://via.placeholder.com/400x711'}" alt="${p.name}">
          <div class="play-btn">▶</div>
        </a>
@@ -292,8 +300,8 @@ function render(){
          <h3>${p.name}</h3>
          <p>${p.desc}</p>
          <div class="btn-group">
-           <a class="btn-dl" href="${p.link5mb || '#'}" target="_blank">&lt;5MB</a>
-           <a class="btn-dl" href="${p.linkXml || '#'}" target="_blank">XML</a>
+           <a class="btn-dl" href="${p.link5mb || '#'}" target="${p.link5mb ? '_blank' : '_self'}">&lt;5MB</a>
+           <a class="btn-dl" href="${p.linkXml || '#'}" target="${p.linkXml ? '_blank' : '_self'}">XML</a>
          </div>
        </div>
      </article>`;
